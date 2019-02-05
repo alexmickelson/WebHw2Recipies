@@ -11,6 +11,6 @@ namespace TodoCore.Models
         {
             Items = items ?? throw new ArgumentNullException(nameof(items));
         }
-        public IEnumerable<TodoItem> Items { get; private set; }
+        public IEnumerable<TodoItem> Items { get; private set; }    
     }
 }
