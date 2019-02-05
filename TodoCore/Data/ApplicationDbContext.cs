@@ -15,5 +15,6 @@ namespace TodoCore.Data
         }
 
         public DbSet<TodoItem> Items { get; set; }
+
     }
 }
