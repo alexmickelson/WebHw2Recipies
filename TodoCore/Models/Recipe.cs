@@ -13,6 +13,6 @@ namespace TodoCore.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Ingredient> Ingredients { get; set; }
+        public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; }
     }
 }

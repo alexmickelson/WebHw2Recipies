@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoCore.Data;
 
-namespace TodoCore.Data.Migrations
+namespace TodoCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190118224837_AddItems")]
-    partial class AddItems
+    [Migration("20190207172536_ThisIsMyMigration")]
+    partial class ThisIsMyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,21 +186,44 @@ namespace TodoCore.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TodoCore.Models.TodoItem", b =>
+            modelBuilder.Entity("TodoCore.Models.Ingredient", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTimeOffset?>("DueAt");
+                    b.Property<string>("Name");
 
-                    b.Property<bool>("IsDone");
+                    b.HasKey("Id");
 
-                    b.Property<string>("Title")
+                    b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("TodoCore.Models.Recipe", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name")
                         .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.ToTable("Items");
+                    b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("TodoCore.Models.RecipeIngredient", b =>
+                {
+                    b.Property<Guid>("RecipeId");
+
+                    b.Property<Guid>("IngredientId");
+
+                    b.HasKey("RecipeId", "IngredientId");
+
+                    b.HasIndex("IngredientId");
+
+                    b.ToTable("RecipeIngredient");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -245,6 +268,19 @@ namespace TodoCore.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TodoCore.Models.RecipeIngredient", b =>
+                {
+                    b.HasOne("TodoCore.Models.Ingredient", "Ingredient")
+                        .WithMany("RecipeIngredients")
+                        .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TodoCore.Models.Recipe", "Recipe")
+                        .WithMany("RecipeIngredients")
+                        .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

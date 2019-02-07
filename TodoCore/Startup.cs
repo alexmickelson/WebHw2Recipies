@@ -37,13 +37,13 @@ namespace TodoCore
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<RecipeDBContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<RecipeDBContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<ITodoItemService, TodoItemService>();
 

@@ -24,7 +24,7 @@ namespace TodoCore.Services
             newItem.IsDone = false;
             newItem.DueAt = DateTimeOffset.Now.AddDays(3);
                        
-            _context.Items.Add(newItem);
+            //_context.Items.Add(newItem);
 
             var saveResult = await _context.SaveChangesAsync();
             return (saveResult == 1);
@@ -32,20 +32,30 @@ namespace TodoCore.Services
 
         public Task<TodoItem[]> GetIncompleteItemsAsync()
         {
-            return _context.Items.Where(i => i.IsDone == false).ToArrayAsync();
-            //return _context.Items.ToArrayAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<bool> MarkDoneAsync(Guid id)
+        public Task<bool> MarkDoneAsync(Guid id)
         {
-            var item = await _context.Items.Where(x => x.Id == id)
-                .SingleOrDefaultAsync();
-
-            if (item == null)
-                return false;
-            item.IsDone = true;
-            var saveResult = await _context.SaveChangesAsync();
-            return (saveResult == 1);
+            throw new NotImplementedException();
         }
+
+        //public Task<TodoItem[]> GetIncompleteItemsAsync()
+        //{
+        //    return _context.Items.Where(i => i.IsDone == false).ToArrayAsync();
+        //    //return _context.Items.ToArrayAsync();
+        //}
+
+        //public async Task<bool> MarkDoneAsync(Guid id)
+        //{
+        //    var item = await _context.Items.Where(x => x.Id == id)
+        //        .SingleOrDefaultAsync();
+
+        //    if (item == null)
+        //        return false;
+        //    item.IsDone = true;
+        //    var saveResult = await _context.SaveChangesAsync();
+        //    return (saveResult == 1);
+        //}
     }
 }
