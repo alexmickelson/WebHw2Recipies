@@ -18,9 +18,9 @@ namespace TodoCore.Controllers
             _recipeService = recipeService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_recipeService.GetAllRecipesAsync());
+            return View(await _recipeService.GetAllRecipesAsync());
         }
 
         public IActionResult Privacy()
@@ -32,6 +32,22 @@ namespace TodoCore.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult Form()
+        {
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Form(Recipe recipe)
+        {
+            if (!ModelState.IsValid)
+                return RedirectToAction("Index");
+
+            _recipeService.
         }
     }
 }

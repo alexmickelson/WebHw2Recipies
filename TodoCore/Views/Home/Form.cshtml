@@ -1,0 +1,21 @@
+﻿@using TodoCore.Models
+@model Recipe
+@{
+    ViewData["Title"] = "SampleFormView";
+}
+
+<h1>SampleForm View</h1>
+<div class="panel-default">
+    <div class="panel-heading">@Model.Name</div>
+    <div>@Model.Description</div>
+</div>
+<hr />
+<h2>SampleForm Update</h2>
+<form asp-action="UpdateItem" method="post">
+    <label asp-for="Name">First Name:</label>
+    <input asp-for="Name" />
+    <label asp-for="Description">Last Name:</label>
+    <input asp-for="Description" />
+    <br />
+    <button type="submit">Save</button>
+</form>
