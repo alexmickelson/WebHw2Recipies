@@ -10,8 +10,8 @@ using TodoCore.Data;
 namespace TodoCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190207172536_ThisIsMyMigration")]
-    partial class ThisIsMyMigration
+    [Migration("20190209204246_myMigration")]
+    partial class myMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TodoCore.Migrations
 {
-    public partial class ThisIsMyMigration : Migration
+    public partial class myMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

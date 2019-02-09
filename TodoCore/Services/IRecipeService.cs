@@ -9,7 +9,9 @@ namespace TodoCore.Services
     public interface IRecipeService
     {
         Task<Recipe[]> GetAllRecipesAsync();
+        void AddRecipe(Recipe recipe);
+        void DeleteAll();
+        Ingredient[] GetIngredients(Recipe recipe);
+        Recipe GetRecipe(Guid recipeId);
     }
-
-
 }

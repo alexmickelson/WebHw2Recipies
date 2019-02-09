@@ -10,7 +10,18 @@
 <div>
     @{ foreach(var r in Model)
         {
-            <div>r.Name</div>
+            <div>Name: @r.Name</div>
+            <div>Description: @r.Description</div>
+            <div>
+                <a asp-action="RecipeDetails" asp-route-id="@r.Id">Get Ingredients</a>
+                @*<ul>
+                    @foreach (var ri in r.RecipeIngredients)
+                    {
+                        @Html.Partial("_Ingredient", ri)
+                    }
+                </ul>*@
+            </div>
+            <br />
         }
     }
 </div>

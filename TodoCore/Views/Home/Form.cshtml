@@ -10,12 +10,14 @@
     <div>@Model.Description</div>
 </div>
 <hr />
-<h2>SampleForm Update</h2>
+<h2>Insert Recipe</h2>
 <form asp-action="UpdateItem" method="post">
-    <label asp-for="Name">First Name:</label>
+    <label asp-for="Name">Name:</label>
     <input asp-for="Name" />
-    <label asp-for="Description">Last Name:</label>
+    <label asp-for="Description">Description:</label>
     <input asp-for="Description" />
+    <label asp-for="RecipeIngredients">Ingredients</label>
+    <input asp-for="RecipeIngredients" />
     <br />
     <button type="submit">Save</button>
 </form>

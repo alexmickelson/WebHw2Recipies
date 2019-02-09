@@ -37,7 +37,8 @@ namespace TodoCore.Controllers
         [HttpGet]
         public IActionResult Form()
         {
-
+            var recipe = new Recipe();
+            return View(recipe);
         }
 
         [HttpPost]
@@ -47,7 +48,24 @@ namespace TodoCore.Controllers
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
 
-            _recipeService.
+            _recipeService.AddRecipe(recipe);
+            return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Delete()
+        {
+            _recipeService.DeleteAll();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult RecipeDetails(Guid recipeId)
+        {
+            var recipe = _recipeService.GetRecipe(recipeId);
+            ViewData["RecipeDetails"] = recipe.Name;
+            ViewData["RecipeDescription"] = recipe.Description;
+            return View(_recipeService.GetIngredients(recipe));
+        }
+
     }
 }
