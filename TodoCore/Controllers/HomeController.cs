@@ -37,17 +37,49 @@ namespace TodoCore.Controllers
         [HttpGet]
         public IActionResult Form()
         {
-
+            var recipe = new FormModel();
+            return View(recipe);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Form(Recipe recipe)
+        public IActionResult Form(FormModel formModel)
         {
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
+            Recipe recipe = new Recipe();
+            recipe.Name = formModel.Name;
+            recipe.Description = formModel.Description;
+            recipe.Ingredients = new List<Ingredient>();
+            recipe.AddIngredient(new Ingredient(formModel.ing1,formModel.qty1 , formModel.meas1));
+            recipe.AddIngredient(new Ingredient(formModel.ing2, formModel.qty2, formModel.meas2));
 
-            _recipeService.
+            _recipeService.AddRecipe(recipe);
+            return RedirectToAction(nameof(Index));
+        }
+       
+
+        [HttpGet]
+        public IActionResult Delete()
+        {
+            _recipeService.DeleteAll();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        public IActionResult RecipeDetails(int id)
+        {
+            var recipe = _recipeService.GetRecipe(id);
+            return View(recipe);
+        }
+
+        
+        public IActionResult AddIngredient(Ingredient ingredient)
+        {
+            _recipeService.GetRecipe(ingredient.parent).AddIngredient(ingredient);
+            _recipeService.Update();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

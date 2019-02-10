@@ -1,0 +1,21 @@
+﻿@model Recipe
+@{ 
+    var id = Model.Id;
+}
+<section>
+    <div>Name: @Model.Name</div>
+    <div>Description: @Model.Description</div>
+    @foreach (var i in Model.Ingredients)
+    {
+        <div>Ingredient: @i.Name    @i.Qty  @i.Measure</div>
+        <br />
+    }
+
+    <br />
+    @{
+        Model.Ingredients[0].parent = Model.Id;
+    }
+    @Html.Partial("AddIngredient", new Ingredient(Model.Id))
+
+
+</section>

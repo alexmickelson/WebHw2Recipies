@@ -186,20 +186,32 @@ namespace TodoCore.Migrations
 
             modelBuilder.Entity("TodoCore.Models.Ingredient", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Measure");
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("Qty");
+
+                    b.Property<int?>("RecipeId");
+
+                    b.Property<int>("parent");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Ingredients");
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("Ingredient");
                 });
 
             modelBuilder.Entity("TodoCore.Models.Recipe", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
 
@@ -209,19 +221,6 @@ namespace TodoCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Recipes");
-                });
-
-            modelBuilder.Entity("TodoCore.Models.RecipeIngredient", b =>
-                {
-                    b.Property<Guid>("RecipeId");
-
-                    b.Property<Guid>("IngredientId");
-
-                    b.HasKey("RecipeId", "IngredientId");
-
-                    b.HasIndex("IngredientId");
-
-                    b.ToTable("RecipeIngredient");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -269,17 +268,11 @@ namespace TodoCore.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TodoCore.Models.RecipeIngredient", b =>
+            modelBuilder.Entity("TodoCore.Models.Ingredient", b =>
                 {
-                    b.HasOne("TodoCore.Models.Ingredient", "Ingredient")
-                        .WithMany("RecipeIngredients")
-                        .HasForeignKey("IngredientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TodoCore.Models.Recipe", "Recipe")
-                        .WithMany("RecipeIngredients")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("TodoCore.Models.Recipe")
+                        .WithMany("Ingredients")
+                        .HasForeignKey("RecipeId");
                 });
 #pragma warning restore 612, 618
         }

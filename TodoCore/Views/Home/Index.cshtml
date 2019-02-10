@@ -8,9 +8,14 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 <div>
-    @{ foreach(var r in Model)
+    @{ foreach (var r in Model)
         {
-            <div>r.Name</div>
+            <div>Name: @r.Name</div>
+            <div>Description: @r.Description</div>
+            
+            //var id = new GuidForm();
+           
+            <a href="/Home/RecipeDetails/@r.Id">Details</a>
         }
     }
 </div>

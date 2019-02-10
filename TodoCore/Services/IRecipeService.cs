@@ -9,6 +9,10 @@ namespace TodoCore.Services
     public interface IRecipeService
     {
         Task<Recipe[]> GetAllRecipesAsync();
+        void AddRecipe(Recipe recipe);
+        void DeleteAll();
+        Recipe GetRecipe(int id);
+        void Update();
     }
 
 

@@ -1,5 +1,5 @@
 ﻿@using TodoCore.Models
-@model Recipe
+@model FormModel
 @{
     ViewData["Title"] = "SampleFormView";
 }
@@ -10,12 +10,44 @@
     <div>@Model.Description</div>
 </div>
 <hr />
-<h2>SampleForm Update</h2>
+<h2>New Recipe</h2>
 <form asp-action="UpdateItem" method="post">
-    <label asp-for="Name">First Name:</label>
+    <label asp-for="Name">Name</label>
     <input asp-for="Name" />
-    <label asp-for="Description">Last Name:</label>
+    <label asp-for="Description">Description</label>
     <input asp-for="Description" />
+    <br />
+
+    <label asp-for="ing1">First Ingredient: </label>
+    <input asp-for="ing1" />
+    <label asp-for="qty1">Amount: </label>
+    <input asp-for="qty1" min="1" />
+    <label asp-for="meas1">Measurement: </label>
+    <select asp-for="meas1" >
+        <option value="pounds">pounds</option>
+        <option value="oz">ounces</option>
+        <option value="tbs">tablespoon</option>
+        <option value="tsp">teaspoon</option>
+        <option value="cup">cup</option>
+        <option value="1/100 Cup">0.01 Cup</option>
+        <option value="gallons">gallons</option>
+    </select>
+    <br />
+    <label asp-for="ing2">Second Ingredient: </label>
+    <input asp-for="ing2" />
+    <label asp-for="qty2">Amount: </label>
+    <input asp-for="qty2" min="1"  />
+    <label asp-for="meas2">Measurement: </label>
+    <select asp-for="meas2">
+        <option value="pounds">pounds</option>
+        <option value="oz">ounces</option>
+        <option value="tbs">tablespoon</option>
+        <option value="tsp">teaspoon</option>
+        <option value="cup">cup</option>
+        <option value="1/100 Cup">0.01 Cup</option>
+        <option value="gallons">gallons</option>
+    </select>
+
     <br />
     <button type="submit">Save</button>
 </form>
